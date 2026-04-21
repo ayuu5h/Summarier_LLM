@@ -11,18 +11,17 @@ uploaded_file = st.file_uploader("Upload CSV", type=["csv"])
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
 
-    st.subheader("📄 Data")
+    st.subheader("Data")
     st.dataframe(df)
 
-    # ✅ STEP 1: Pandas summary
+    # STEP 1: Pandas summary
     summary = {
         "total_defects": len(df),
         "defect_summary": df["Defect_Type"].value_counts().to_dict(),
         "severity_summary": df["Severity"].value_counts().to_dict()
     }
 
-    # ✅ CLEAN TEXT DISPLAY (instead of JSON)
-    st.subheader("📊 Summary")
+    st.subheader("Summary")
 
     st.write(f"**Total Defects:** {summary['total_defects']}")
 
@@ -34,9 +33,9 @@ if uploaded_file:
     for sev, count in summary["severity_summary"].items():
         st.write(f"- {sev}: {count}")
 
-    # ✅ STEP 2: LLM Insights
+    # STEP 2: LLM Insights
     if st.button("Generate Insights"):
         result = analyze_with_llm(summary)
 
-        st.subheader("🤖 AI Insights")
+        st.subheader("AI Insights")
         st.write(result)
