@@ -132,7 +132,7 @@ def save_dataset():
         writer.writeheader()
         writer.writerows(rows)
 
-    print(f"✅ Generated {len(rows)} reports → {file_path}")
+    print(f"Generated {len(rows)} reports → {file_path}")
 
     # preview
     for r in rows[:3]:
